@@ -2,7 +2,7 @@ from django import forms
 
 
 class StudentForm(forms.Form):
-    Months = (
+    Months= (
         (1,'Jan'),(2,'Feb'),
         (3,'March'),(4,'April'),
         (5,'May'),(6,'Jun'),
