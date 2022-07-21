@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
- 
+{% load crispy_forms_tags %}
 {% block content %}
   <div id="container" style="width: 75%;">
     <canvas id="stud-chart" data-url="{% url 'stud-chart' %}"></canvas>
@@ -42,4 +42,7 @@
     });
  
 </script>
+
+{% comment %} {{ form.as_p }} {% endcomment %}
+{% crispy form %}
 {% endblock %}

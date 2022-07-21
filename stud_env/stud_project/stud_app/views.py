@@ -1,8 +1,10 @@
 from audioop import avg
+from multiprocessing import context
 from django.shortcuts import render
 from django.db.models import Sum,Avg
 from django.http import JsonResponse
 from .models import student
+from .forms import *
 
 from django.views.generic import View
    
@@ -10,7 +12,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
  
 def home(request):
-    return render(request, 'home.html')
+    context = {'form':StudentForm()}
+    return render(request, 'home.html',context)
  
 # def marks_chart(request):
 #     labels = []
