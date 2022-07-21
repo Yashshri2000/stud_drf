@@ -1,5 +1,6 @@
+from audioop import avg
 from django.shortcuts import render
-from django.db.models import Sum
+from django.db.models import Sum,Avg
 from django.http import JsonResponse
 from .models import student
 
@@ -34,9 +35,9 @@ class marks_chart(APIView):
         labels = []
         data = []
 
-        queryset = student.objects.values('name').annotate(marks=Sum('marks')).order_by('-marks') 
+        queryset = student.objects.values('Exam_month').annotate(marks=Avg('marks')).order_by('-marks') 
         for entry in queryset:
-            labels.append(entry['name'])
+            labels.append(entry['Exam_month'])
             data.append(entry['marks'])
      
         return JsonResponse(data={
