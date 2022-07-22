@@ -1,15 +1,19 @@
 from django import forms
-
-
-class StudentForm(forms.Form):
-    Months= (
-        (1,'Jan'),(2,'Feb'),
-        (3,'March'),(4,'April'),
-        (5,'May'),(6,'Jun'),
-        (7,'July'),(8,'Aug'),
-        (9,'Sep'),(10,'Oct'),
-        (11,'Nov'),(12,'Dec'),
-    )
-    name = forms.CharField(max_length=30)
-    marks = forms.IntegerField()
-    Exam_month = forms.ChoiceField(choices=Months)
+from django.urls import reverse_lazy
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from .models import *
+class StudentForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_action = reverse_lazy('add')
+        self.helper.form_method = 'POST'
+        self.helper.add_input(Submit('submit','submit'))
+    
+    class Meta:
+        model= student
+        fields = ('user','name','marks','Exam_month')
+  
+        

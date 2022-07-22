@@ -2,7 +2,7 @@ from audioop import avg
 from multiprocessing import context
 from django.shortcuts import render
 from django.db.models import Sum,Avg
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from .models import student
 from .forms import *
 
@@ -12,8 +12,22 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
  
 def home(request):
-    context = {'form':StudentForm()}
-    return render(request, 'home.html',context)
+    if request.method == 'GET':
+        context = {'form':StudentForm()}
+        return render(request, 'home.html',context)
+    
+def add_stud(request):
+    if request.method == 'GET':
+        context = {'form':StudentForm()}
+        return render(request, 'addStud.html',context)
+    elif request.method == 'POST':
+        form = StudentForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('Succefully Added!')
+        context ={'form': form}
+        return render(request,'addStud.html', context)
  
 # def marks_chart(request):
 #     labels = []
