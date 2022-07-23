@@ -14,6 +14,6 @@ class StudentForm(forms.ModelForm):
     
     class Meta:
         model= student
-        fields = ('user','name','marks','Exam_month')
+        fields = ('name','marks','Exam_month')
   
         

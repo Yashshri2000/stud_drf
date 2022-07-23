@@ -20,7 +20,7 @@ class student(models.Model):
         nov='November'
         dec='December'
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     marks = models.PositiveIntegerField()
     Exam_month = models.CharField(max_length=20,choices=Months.choices)
